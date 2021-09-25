@@ -12,9 +12,6 @@ from flask_gravatar import Gravatar
 from typing import Callable
 from functools import wraps
 from sqlalchemy.ext.declarative import declarative_base
-from dotenv import load_dotenv
-
-load_dotenv()
 
 
 class MySQLAlchemy(SQLAlchemy):
@@ -49,7 +46,7 @@ gravatar = Gravatar(app,
 
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL",  "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = MySQLAlchemy(app)
 
